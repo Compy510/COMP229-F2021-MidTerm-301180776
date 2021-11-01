@@ -25,12 +25,12 @@ router.get('/', (req, res, next) => {
 });
 
 //  GET the Book Details page in order to add a new Book
-router.get('/add', (req, res, next) => {
-  res.render('books/add', {title: 'Add Book'})
+router.get('/details-add', (req, res, next) => {
+  res.render('books/details-add', {title: 'Add Book'})
 });
 
 // POST process the Book Details page and create a new Book - CREATE
-router.post('/add', (req, res, next) => {
+router.post('/details-add', (req, res, next) => {
   let addedBook = Book({
     "title": req.body.title,
     "price": req.body.price,
