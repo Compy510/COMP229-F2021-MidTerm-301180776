@@ -1,3 +1,10 @@
+/*
+Filename: books.js
+Author: Arshad Khan
+StudentID: 301180776
+WebApp name: COMP229-F2021-MidTerm-301180776
+*/
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
@@ -5,12 +12,12 @@ let mongoose = require('mongoose');
 const books = require('../models/books');
 
 // define the book model
-let Book = require('../models/books');
+let book = require('../models/books');
 
 /* GET books List page. READ */
 router.get('/', (req, res, next) => {
   // find all books in the books collection
-  Book.find( (err, books) => {
+  book.find( (err, books) => {
     if (err) {
       return console.error(err);
     }
@@ -24,14 +31,14 @@ router.get('/', (req, res, next) => {
 
 });
 
-//  GET the Book Details page in order to add a new Book
+//  GET the book Details page in order to add a new book
 router.get('/details-add', (req, res, next) => {
-  res.render('books/details-add', {title: 'Add Book'})
+  res.render('books/details-add', {title: 'Add book'})
 });
 
-// POST process the Book Details page and create a new Book - CREATE
+// POST process the book Details page and create a new book - CREATE
 router.post('/details-add', (req, res, next) => {
-  let addedBook = Book({
+  let addedBook = book({
     "title": req.body.title,
     "price": req.body.price,
     "author": req.body.author,
@@ -39,7 +46,7 @@ router.post('/details-add', (req, res, next) => {
 
   });
 
-  Book.create(addedBook, (err, Book) => {
+  book.create(addedBook, (err, book) => {
     if (err) {
       console.log(err);
       res.end(err);
@@ -50,11 +57,11 @@ router.post('/details-add', (req, res, next) => {
   });
 });
 
-// GET the Book Details page in order to edit an existing Book
+// GET the book Details page in order to edit an existing book
 router.get('/details/:id', (req, res, next) => {
   let id = req.params.id;
 
-  Book.findById(id, (err, BookToUpdate) => {
+  book.findById(id, (err, bookToUpdate) => {
       if(err)
       {
           console.log(err);
@@ -62,7 +69,7 @@ router.get('/details/:id', (req, res, next) => {
       }
       else
       {
-          res.render('books/details', {title: 'Update Book', books: BookToUpdate})
+          res.render('books/details', {title: 'Edit book', books: bookToUpdate})
       }
   });
 });
@@ -71,7 +78,7 @@ router.get('/details/:id', (req, res, next) => {
 router.post('/details/:id', (req, res, next) => {
   let id = req.params.id;
 
-  let updatedBook = Book({
+  let updatedBook = book({
     "_id" : id,
     "title": req.body.title,
     "price": req.body.price,
@@ -80,7 +87,7 @@ router.post('/details/:id', (req, res, next) => {
 
   });
 
-  Book.updateOne({_id: id}, updatedBook, (err) => {
+  book.updateOne({_id: id}, updatedBook, (err) => {
       if(err)
       {
           console.log(err);
@@ -97,7 +104,7 @@ router.post('/details/:id', (req, res, next) => {
 router.get('/delete/:id', (req, res, next) => {
   let id = req.params.id;
 
-  Book.remove({_id: id}, (err) => {
+  book.remove({_id: id}, (err) => {
       if(err)
       {
           console.log(err);

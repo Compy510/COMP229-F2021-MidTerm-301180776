@@ -1,4 +1,11 @@
-// moddules for node and express
+/*
+Filename: app.js
+Author: Arshad Khan
+StudentID: 301180776
+WebApp name: COMP229-F2021-MidTerm-301180776
+*/
+
+// modules for node and express
 let createError = require('http-errors');
 let express = require('express');
 let path = require('path');
